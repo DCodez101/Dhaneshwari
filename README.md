@@ -8,10 +8,7 @@ Built with modern frontend tools to ensure fast performance and a smooth user ex
 
 ---
 
-## Live Demo
-
-https://dhaneshwari-gray.vercel.app
-
+## Live Demo https://dhaneshwari-alpha.vercel.app/
 ---
 
 ## Tech Stack
