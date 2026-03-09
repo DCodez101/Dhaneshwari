@@ -1,4 +1,4 @@
-import hero from "../assets/Dhaneshwari Photoshoot/WhatsApp Image 2024-02-22 at 4.34.35 PM (1).jpeg";
+import hero from "../assets/Dhaneshwari Photoshoot/room77.jpeg";
 
 function Hero() {
   return (

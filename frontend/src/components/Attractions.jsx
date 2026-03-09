@@ -1,27 +1,28 @@
-import room1 from "../assets/Dhaneshwari Photoshoot/20250601_122955.jpg";
-import room2 from "../assets/Dhaneshwari Photoshoot/20250601_122955.jpg";
-import room3 from "../assets/Dhaneshwari Photoshoot/20250601_122955.jpg";
+import image1 from "../assets/Dhaneshwari Photoshoot/Kashi-Vishwanath.webp";
+import image2 from "../assets/Dhaneshwari Photoshoot/kalBharavTemple.webp";
+import image3 from "../assets/Dhaneshwari Photoshoot/eveningArati.webp";
+import image4 from "../assets/Dhaneshwari Photoshoot/roomwithChaire.jpeg";
 
 const attractions = [
   {
     title: "Kashi Vishwanath",
-    desc: "Elegant interiors with modern comfort.",
-    img: room1,
+    desc: "Sacred temple dedicated to Lord Shiva in Varanasi.",
+    img: image1,
   },
   {
     title: "Kal Bhairav Temple",
-    desc: "Luxury stay experience for couples & families.",
-    img: room2,
+    desc: "Ancient temple known as the guardian of Kashi.",
+    img: image2,
   },
   {
     title: "Evening Ganga Aarti",
-    desc: "Spacious comfort with premium amenities.",
-    img: room3,
+    desc: "Spiritual evening ritual on the holy Ganga ghats.",
+    img: image3,
   },
   {
     title: "Premium Room",
-    desc: "Luxury stay experience for couples & families.",
-    img: room2,
+    desc: "Comfortable room with modern design and amenities.",
+    img: image4,
   },
 ];
 

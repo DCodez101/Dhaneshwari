@@ -1,8 +1,8 @@
-import g1 from "../assets/Dhaneshwari Photoshoot/20250601_123036.jpg";
-import g2 from "../assets/Dhaneshwari Photoshoot/20250601_123123.jpg";
-import g3 from "../assets/Dhaneshwari Photoshoot/20250601_123123.jpg";
-import g4 from "../assets/Dhaneshwari Photoshoot/20250601_123123.jpg";
-import g5 from "../assets/Dhaneshwari Photoshoot/20250601_123123.jpg";
+import g1 from "../assets/Dhaneshwari Photoshoot/roomwithTV.jpeg";
+import g2 from "../assets/Dhaneshwari Photoshoot/room2.jpeg";
+import g3 from "../assets/Dhaneshwari Photoshoot/room3.jpeg";
+import g4 from "../assets/Dhaneshwari Photoshoot/room4.jpeg";
+import g5 from "../assets/Dhaneshwari Photoshoot/room5.jpeg";
 
 const images = [g1, g2, g3, g4, g5];
 
