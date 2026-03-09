@@ -1,6 +1,6 @@
-import room1 from "../assets/Dhaneshwari Photoshoot/20250603_102736.jpg";
-import room2 from "../assets/Dhaneshwari Photoshoot/20250603_102736.jpg";
-import room3 from "../assets/Dhaneshwari Photoshoot/WhatsApp Image 2024-02-22 at 4.34.32 PM.jpeg";
+import room1 from "../assets/Dhaneshwari Photoshoot/roomewithBlancket.jpeg";
+import room2 from "../assets/Dhaneshwari Photoshoot/roomwithBalloon.jpg";
+import room3 from "../assets/Dhaneshwari Photoshoot/astheticRoom.jpeg";
 
 const rooms = [
   {

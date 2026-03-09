@@ -1,37 +1,34 @@
 import { useState, useEffect, useRef } from "react";
-import room1 from "../assets/Dhaneshwari Photoshoot/20250601_122955.jpg";
-import room2 from "../assets/Dhaneshwari Photoshoot/20250601_122955.jpg";
-import room3 from "../assets/Dhaneshwari Photoshoot/20250601_122955.jpg";
+
+import image1 from "../assets/Dhaneshwari Photoshoot/Kashi-Vishwanath.webp";
+import image2 from "../assets/Dhaneshwari Photoshoot/kalBharavTemple.webp";
+import image3 from "../assets/Dhaneshwari Photoshoot/eveningArati.webp";
+import image4 from "../assets/Dhaneshwari Photoshoot/roomwithChaire.jpeg";
 
 const attractions = [
   {
-    id: 1,
     title: "Kashi Vishwanath",
-    desc: "One of the most famous Hindu temples dedicated to Lord Shiva, located in the heart of Varanasi.",
-    img: room1,
+    desc: "Sacred temple dedicated to Lord Shiva in Varanasi.",
+    img: image1,
   },
   {
-    id: 2,
     title: "Kal Bhairav Temple",
-    desc: "Ancient temple dedicated to Kal Bhairav, the guardian deity of Varanasi, known for its unique rituals.",
-    img: room2,
+    desc: "Ancient temple known as the guardian of Kashi.",
+    img: image2,
   },
   {
-    id: 3,
     title: "Evening Ganga Aarti",
-    desc: "Mesmerizing spiritual ceremony performed daily at Dashashwamedh Ghat with fire, smoke and chants.",
-    img: room3,
+    desc: "Spiritual evening ritual on the holy Ganga ghats.",
+    img: image3,
   },
   {
-    id: 4,
-    title: "Sarnath",
-    desc: "Sacred Buddhist site where Buddha gave his first sermon, featuring ancient stupas and museums.",
-    img: room2,
+    title: "Premium Room",
+    desc: "Comfortable room with modern design and amenities.",
+    img: image4,
   },
 ];
 
 function Attractions() {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
@@ -40,13 +37,9 @@ function Attractions() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerView(1);
-      } else if (window.innerWidth < 768) {
-        setItemsPerView(2);
-      } else {
-        setItemsPerView(3);
-      }
+      if (window.innerWidth < 640) setItemsPerView(1);
+      else if (window.innerWidth < 768) setItemsPerView(2);
+      else setItemsPerView(3);
     };
 
     handleResize();
@@ -54,15 +47,15 @@ function Attractions() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const totalSlides = attractions.length;
+  const startIndex = itemsPerView;
+  const [slideIndex, setSlideIndex] = useState(startIndex);
+
   const extendedAttractions = [
     ...attractions.slice(-itemsPerView),
     ...attractions,
     ...attractions.slice(0, itemsPerView),
   ];
-
-  const totalSlides = attractions.length;
-  const startIndex = itemsPerView;
-  const [slideIndex, setSlideIndex] = useState(startIndex);
 
   const handleTransitionEnd = () => {
     setIsTransitioning(false);
@@ -122,14 +115,9 @@ function Attractions() {
     if (!touchStart || !touchEnd) return;
 
     const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
 
-    if (isLeftSwipe) {
-      nextSlide();
-    } else if (isRightSwipe) {
-      prevSlide();
-    }
+    if (distance > 50) nextSlide();
+    if (distance < -50) prevSlide();
 
     setTouchStart(null);
     setTouchEnd(null);
@@ -137,14 +125,12 @@ function Attractions() {
   };
 
   return (
-    <section className="py-0 ">
+    <section className="py-0">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-16 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-3">
             Famous Attractions
           </h2>
-
-        
         </div>
 
         <div
@@ -153,15 +139,10 @@ function Attractions() {
           onMouseLeave={resumeAutoPlay}
         >
           <div className="relative rounded-3xl overflow-hidden">
-            <div className="absolute left-0 top-0 z-10 h-full w-32"></div>
-            <div className="absolute right-0 top-0 z-10 h-full w-32 "></div>
-
             <div
               className="flex transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing"
               style={{
-                transform: `translateX(-${
-                  slideIndex * (100 / itemsPerView)
-                }%)`,
+                transform: `translateX(-${slideIndex * (100 / itemsPerView)}%)`,
               }}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
@@ -174,12 +155,13 @@ function Attractions() {
                   className="flex-shrink-0 px-2"
                   style={{ width: `${100 / itemsPerView}%` }}
                 >
-                  <div className="group/card relative overflow-hidden rounded-2xl bg-white  transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                    <div className="relative h-48 overflow-hidden">
+                  <div className="group/card relative overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                    {/* IMAGE FULL WIDTH */}
+                    <div className="relative w-full aspect-[16/10] overflow-hidden">
                       <img
                         src={item.img}
                         alt={item.title}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
                       />
                     </div>
 
@@ -221,73 +203,37 @@ function Attractions() {
             <>
               <button
                 onClick={prevSlide}
-                className="absolute -left-4 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-white p-4 shadow-xl transition-all duration-300 hover:scale-110 hover:bg-orange-500 hover:text-white focus:outline-none opacity-0 group-hover:opacity-100"
+                className="absolute -left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white p-4 shadow-xl hover:scale-110 hover:bg-orange-500 hover:text-white opacity-0 group-hover:opacity-100"
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2.5}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
+                ‹
               </button>
 
               <button
                 onClick={nextSlide}
-                className="absolute -right-4 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-white p-4 shadow-xl transition-all duration-300 hover:scale-110 hover:bg-orange-500 hover:text-white focus:outline-none opacity-0 group-hover:opacity-100"
+                className="absolute -right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white p-4 shadow-xl hover:scale-110 hover:bg-orange-500 hover:text-white opacity-0 group-hover:opacity-100"
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2.5}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+                ›
               </button>
             </>
           )}
         </div>
 
         {attractions.length > itemsPerView && (
-          <div className="mt-8 flex flex-col items-center space-y-4">
-            <div className="flex space-x-3">
-              {Array.from({ length: totalSlides }).map((_, i) => {
-                const isActive =
-                  (slideIndex - startIndex + totalSlides) % totalSlides === i;
+          <div className="mt-8 flex justify-center space-x-3">
+            {Array.from({ length: totalSlides }).map((_, i) => {
+              const isActive =
+                (slideIndex - startIndex + totalSlides) % totalSlides === i;
 
-                return (
-                  <button
-                    key={i}
-                    onClick={() => goToSlide(i)}
-                    className={`group/dot relative transition-all duration-500 ${
-                      isActive ? "scale-125" : "scale-100"
-                    }`}
-                  >
-                    <div
-                      className={`h-3 rounded-full transition-all duration-500 ${
-                        isActive
-                          ? "w-12 bg-orange-400"
-                          : "w-3 bg-orange-500 group-hover/dot:bg-orange-300"
-                      }`}
-                    />
-                  </button>
-                );
-              })}
-            </div>
-
-         
+              return (
+                <button
+                  key={i}
+                  onClick={() => goToSlide(i)}
+                  className={`h-3 rounded-full transition-all duration-500 ${
+                    isActive ? "w-12 bg-orange-400" : "w-3 bg-orange-500"
+                  }`}
+                />
+              );
+            })}
           </div>
         )}
       </div>
