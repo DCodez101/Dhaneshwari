@@ -129,16 +129,16 @@ function Attractions() {
   };
 
   return (
-    <section className="py-10 sm:py-12 lg:py-0">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mb-10 sm:mb-12 lg:mb-16 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+    <section className="w-full pt-8 px-4 sm:px-6 lg:px-10">
+      <div className="w-full py-10 sm:py-12 lg:py-14 bg-[#e4dcce] rounded-2xl">
+        <div className="mb-10 sm:mb-12 text-center px-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
             Famous Attractions
           </h2>
         </div>
 
         <div
-          className="relative group"
+          className="relative group px-4 sm:px-6 lg:px-8"
           onMouseEnter={pauseAutoPlay}
           onMouseLeave={resumeAutoPlay}
         >
@@ -160,7 +160,6 @@ function Attractions() {
                   style={{ width: `${100 / itemsPerView}%` }}
                 >
                   <div className="group/card relative overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                    {/* IMAGE FULL WIDTH */}
                     <div className="relative w-full aspect-[16/10] overflow-hidden">
                       <img
                         src={item.img}
@@ -196,7 +195,7 @@ function Attractions() {
                       </button>
                     </div>
 
-                    <div className="absolute top-0 right-0 h-16 w-16 -translate-y-8 translate-x-8 transform bg-orange-500/10 rounded-full transition-transform group-hover/card:scale-150"></div>
+                    <div className="absolute top-0 right-0 h-16 w-16 -translate-y-8 translate-x-8 bg-orange-500/10 rounded-full transition-transform group-hover/card:scale-150"></div>
                   </div>
                 </div>
               ))}
@@ -207,16 +206,14 @@ function Attractions() {
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-2 sm:-left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white p-2 sm:p-4 shadow-xl hover:scale-110 hover:bg-orange-500 hover:text-white opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
-                aria-label="Previous"
+                className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white shadow-lg hover:bg-orange-500 hover:text-white transition"
               >
                 ‹
               </button>
 
               <button
                 onClick={nextSlide}
-                className="absolute right-2 sm:-right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white p-2 sm:p-4 shadow-xl hover:scale-110 hover:bg-orange-500 hover:text-white opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
-                aria-label="Next"
+                className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white shadow-lg hover:bg-orange-500 hover:text-white transition"
               >
                 ›
               </button>

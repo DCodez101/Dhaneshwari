@@ -170,23 +170,22 @@ function Gallery() {
 
   return (
     <>
-      <section className="py-10 sm:py-12 lg:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-8 sm:mb-10 lg:mb-12 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+      <section className="w-full px-4 pt-8 sm:px-6 lg:px-10">
+        <div className="w-full py-10 sm:py-12 lg:py-14 bg-[#e4dcce] rounded-2xl">
+          <div className="mb-10 sm:mb-12 text-center px-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
               Our Gallery
             </h2>
           </div>
 
           <div
-            className="relative group"
+            className="relative group px-4 sm:px-6 lg:px-8"
             onMouseEnter={pauseAutoPlay}
             onMouseLeave={resumeAutoPlay}
           >
             <div className="relative rounded-3xl overflow-hidden">
-              {/* gradients */}
-              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent"></div>
-              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-white to-transparent"></div>
+              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 sm:w-32 bg-gradient-to-r from-[#e4dbc9] to-transparent"></div>
+              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 sm:w-32 bg-gradient-to-l from-[#e4dbc9] to-transparent"></div>
 
               <div
                 className="flex transition-transform duration-500 ease-out"
@@ -217,20 +216,17 @@ function Gallery() {
               </div>
             </div>
 
-            {/* arrows */}
             {images.length > itemsPerView && (
               <>
                 <button
                   onClick={prevSlide}
                   className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white shadow-lg hover:bg-orange-500 hover:text-white transition"
-                  aria-label="Previous"
                 >
                   ‹
                 </button>
                 <button
                   onClick={nextSlide}
                   className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white shadow-lg hover:bg-orange-500 hover:text-white transition"
-                  aria-label="Next"
                 >
                   ›
                 </button>
