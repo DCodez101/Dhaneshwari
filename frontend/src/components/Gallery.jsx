@@ -172,11 +172,12 @@ function Gallery() {
     <>
       <section className="w-full px-4 pt-8 sm:px-6 lg:px-10">
         <div className="w-full py-10 sm:py-12 lg:py-14 bg-[#e4dcce] rounded-2xl">
-          <div className="mb-10 sm:mb-12 text-center px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Our Gallery
-            </h2>
-          </div>
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12 px-4">
+         <h2 className="group relative inline-block text-2xl sm:text-3xl font-semibold text-gray-900 font-[Poppins] cursor-pointer">
+  Our Gallery
+  <span className=" absolute left-1/2 -translate-x-1/2 -bottom-2 h-1/17 w-12 bg-black transition-all duration-500 group-hover:w-full"></span>
+</h2>
+        </div>
 
           <div
             className="relative group px-4 sm:px-6 lg:px-8"

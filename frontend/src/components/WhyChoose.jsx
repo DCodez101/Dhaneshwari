@@ -14,9 +14,10 @@ function WhyChoose() {
     <section className="w-full px-4 sm:px-6 lg:px-10 pt-8">
       <div className="w-full py-10 sm:py-12  lg:py-16 bg-[#e4dcce] rounded-2xl">
         <div className="text-center mb-8 sm:mb-10 lg:mb-12 px-4">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 font-[Poppins] ">
-            Why Choose us ?
-          </h2>
+         <h2 className="group relative inline-block text-2xl sm:text-3xl font-semibold text-gray-900 font-[Poppins] cursor-pointer">
+  Why Choose us ?
+  <span className=" absolute left-1/2 -translate-x-1/2 -bottom-2 h-1/17 w-12 bg-black transition-all duration-500 group-hover:w-full"></span>
+</h2>
         </div>
 
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8">

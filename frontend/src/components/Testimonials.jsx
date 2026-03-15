@@ -54,9 +54,12 @@ function Testimonials() {
       <div className="w-full bg-[#e4dcce] rounded-3xl px-4 sm:px-6 lg:px-10 py-10">
 
         <div className="text-center mb-14">
-          <h2 className="mt-3 text-3xl md:text-4xl font-semibold text-[#3c2e23]">
-            What Our Guests Say
-          </h2>
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12 px-4">
+         <h2 className="group relative inline-block text-2xl sm:text-3xl font-semibold text-gray-900 font-[Poppins] cursor-pointer">
+  What Our Guests Say ?
+  <span className=" absolute left-1/2 -translate-x-1/2 -bottom-2 h-1/17 w-12 bg-black transition-all duration-500 group-hover:w-full"></span>
+</h2>
+        </div>
 
           <p className="mt-3 text-sm md:text-base text-[#7b6a57] max-w-2xl mx-auto">
             Real stories from guests who chose Dhaneshwari Guestline for their

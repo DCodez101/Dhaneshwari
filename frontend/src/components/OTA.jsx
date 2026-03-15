@@ -32,9 +32,12 @@ function OTAHighlights() {
     <section className="w-full px-4 sm:px-6 lg:px-10">
       <div className="w-full py-12 mb-6 bg-[#e4dcce] rounded-2xl">
         <div className="text-center mb-12 px-4">
-          <h2 className="text-3xl font-bold text-gray-900 mb-3">
-            Book with Trusted Partners
-          </h2>
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12 px-4">
+         <h2 className="group relative inline-block text-2xl sm:text-3xl font-semibold text-gray-900 font-[Poppins] cursor-pointer">
+    Book on Top OTAs
+  <span className=" absolute left-1/2 -translate-x-1/2 -bottom-2 h-1/17 w-12 bg-black transition-all duration-500 group-hover:w-full"></span>
+</h2>
+        </div>
           <p className="text-gray-600 max-w-xl mx-auto">
             Choose from India's most trusted travel platforms
           </p>
