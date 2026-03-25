@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import hero from "../assets/Dhaneshwari Photoshoot/room77.jpeg";
 
 function Hero() {
@@ -15,9 +16,12 @@ function Hero() {
         </h1>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6">
-          <button className="rounded-full bg-orange-600 px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-sm sm:text-base font-semibold text-white shadow-lg hover:bg-orange-700">
+          <Link
+            to="/booking"
+            className="rounded-full bg-orange-600 px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-center text-sm sm:text-base font-semibold text-white shadow-lg transition hover:bg-orange-700"
+          >
             Book Now
-          </button>
+          </Link>
           <button className="rounded-full border border-white/70 px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-sm sm:text-base font-semibold text-white hover:bg-white/10">
             Explore Services
           </button>

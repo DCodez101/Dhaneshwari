@@ -1,12 +1,16 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { rooms } from "../data/siteData";
 import NotFound from "./NotFound";
+import { buildQuickPaymentState, parseRupeePrice } from "../utils/quickPaymentState";
 
 function RoomDetail() {
   const { roomId } = useParams();
+  const navigate = useNavigate();
   const room = rooms.find((r) => r.id === roomId);
 
   if (!room) return <NotFound />;
+
+  const pricePerNight = parseRupeePrice(room.priceFrom);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14">
@@ -37,7 +41,19 @@ function RoomDetail() {
                 </li>
               ))}
             </ul>
-            <button className="mt-8 w-full rounded-md bg-orange-500 px-5 py-3 text-sm font-medium text-white shadow hover:bg-orange-600">
+            <button
+              type="button"
+              onClick={() =>
+                navigate("/payment", {
+                  state: buildQuickPaymentState({
+                    name: room.title,
+                    image: room.img,
+                    pricePerNight: pricePerNight || 3499,
+                  }),
+                })
+              }
+              className="mt-8 w-full rounded-md bg-orange-500 px-5 py-3 text-sm font-medium text-white shadow hover:bg-orange-600"
+            >
               Book this room
             </button>
           </div>

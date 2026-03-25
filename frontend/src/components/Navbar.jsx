@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const navLinkBase =
@@ -11,8 +11,9 @@ const navItems = [
   { name: "Home", path: "/" },
   { name: "Rooms & Amenities", path: "/rooms" },
   { name: "Gallery", path: "/gallery" },
-  { name: "Blog", path: "/blog" },
+  { name: "Famous Attractions", path: "/famous-attractions" },
   { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
 ];
 
 function Navbar() {
@@ -50,9 +51,12 @@ function Navbar() {
 
         {/* Desktop Booking Button */}
         <div className="hidden lg:block">
-          <button className="rounded-md bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600 hover:shadow-md">
+          <Link
+            to="/booking"
+            className="inline-flex rounded-md bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600 hover:shadow-md"
+          >
             Booking
-          </button>
+          </Link>
         </div>
 
         {/* Mobile menu button */}
@@ -88,9 +92,13 @@ function Navbar() {
             </li>
           ))}
           <li className="pt-2">
-            <button className="w-full rounded-md bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-orange-600">
+            <Link
+              to="/booking"
+              className="block w-full rounded-md bg-orange-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-orange-600"
+              onClick={() => setMenuOpen(false)}
+            >
               Booking
-            </button>
+            </Link>
           </li>
         </ul>
       </div>
