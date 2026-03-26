@@ -4,7 +4,7 @@ import Rooms from "../components/Rooms";
 import Gallery from "../components/Gallery";
 import Attractions from "../components/Attractions";
 import Testimonials from "../components/Testimonials";
-
+import OTASection from "../components/OTA";
 function Home() {
   return (
     <>
@@ -14,6 +14,7 @@ function Home() {
       <Gallery />
       <Attractions />
       <Testimonials />
+      <OTASection/>
     </>
   );
 }
