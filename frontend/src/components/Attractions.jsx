@@ -159,15 +159,6 @@ function Attractions() {
     resumeAutoPlay();
   };
 
-  // Function to get distance color
-  const getDistanceColor = (distance) => {
-    const value = parseInt(distance);
-    if (value <= 100) return "bg-green-500";
-    if (value <= 200) return "bg-yellow-500";
-    if (value <= 500) return "bg-orange-500";
-    return "bg-red-500";
-  };
-
   return (
     <section className="w-full  px-4 sm:px-6 lg:px-10">
       <div className="w-full py-10 sm:py-6 lg:py-8 rounded-2xl">

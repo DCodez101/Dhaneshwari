@@ -1,8 +1,8 @@
+import { GalleryCarousel } from "../components/Gallery";
 import {
-  GalleryCarousel,
   galleryNearbyImages,
   galleryRoomsImages,
-} from "../components/Gallery";
+} from "../data/galleryImages.js";
 
 function GalleryPage() {
   return (

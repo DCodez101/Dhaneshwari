@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useAuth } from "../hooks/useAuth";
 
 const navLinkBase =
-  "relative font-semibold text-gray-700 transition-colors duration-200 hover:text-orange-500";
+  "relative block font-semibold text-gray-700 transition-colors duration-200 hover:text-orange-500";
 
 const navLinkActive = "text-orange-600";
+
+const authLinkBase =
+  "text-sm font-semibold text-gray-600 transition-colors hover:text-orange-600";
+
+const authLinkActive = "text-orange-600";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -13,26 +19,28 @@ const navItems = [
   { name: "Gallery", path: "/gallery" },
   { name: "Famous Attractions", path: "/famous-attractions" },
   { name: "About", path: "/about" },
+  { name: "Reservation", path: "/reservation" },
   { name: "Contact", path: "/contact" },
 ];
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isAuthenticated, signOut } = useAuth();
 
   return (
     <nav className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-gray-200">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
         {/* Logo */}
         <NavLink
           to="/"
-          className="text-lg sm:text-xl font-semibold tracking-wide text-orange-500"
+          className="shrink-0 text-lg sm:text-xl font-semibold tracking-wide text-orange-500"
           onClick={() => setMenuOpen(false)}
         >
           LOGO
         </NavLink>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden lg:flex items-center gap-8 text-sm">
+        <ul className="hidden lg:flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
           {navItems.map((item) => (
             <li key={item.name}>
               <NavLink
@@ -43,17 +51,44 @@ function Navbar() {
                 }
               >
                 {item.name}
-                <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
               </NavLink>
             </li>
           ))}
         </ul>
 
-        {/* Desktop Booking Button */}
-        <div className="hidden lg:block">
+        {/* Desktop: auth + booking */}
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
+          {isAuthenticated ? (
+            <button
+              type="button"
+              onClick={() => signOut()}
+              className="text-sm font-semibold text-gray-600 hover:text-orange-600"
+            >
+              Sign out
+            </button>
+          ) : (
+            <>
+              <NavLink
+                to="/sign-in"
+                className={({ isActive }) =>
+                  `${authLinkBase} ${isActive ? authLinkActive : ""}`
+                }
+              >
+                Sign in
+              </NavLink>
+              <NavLink
+                to="/sign-up"
+                className={({ isActive }) =>
+                  `${authLinkBase} ${isActive ? authLinkActive : ""}`
+                }
+              >
+                Sign up
+              </NavLink>
+            </>
+          )}
           <Link
             to="/booking"
-            className="inline-flex rounded-md bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600 hover:shadow-md"
+            className="inline-flex rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600 hover:shadow-md"
           >
             Booking
           </Link>
@@ -73,7 +108,7 @@ function Navbar() {
       {/* Mobile menu panel */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-out ${
-          menuOpen ? "max-h-[320px] opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <ul className="flex flex-col px-4 pb-4 pt-2 gap-1 border-t border-gray-100">
@@ -91,6 +126,41 @@ function Navbar() {
               </NavLink>
             </li>
           ))}
+          <li className="border-t border-gray-100 pt-2 mt-1">
+            {isAuthenticated ? (
+              <button
+                type="button"
+                className="block w-full text-left py-3 px-3 rounded-md text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-orange-600"
+                onClick={() => {
+                  signOut();
+                  setMenuOpen(false);
+                }}
+              >
+                Sign out
+              </button>
+            ) : (
+              <div className="flex flex-col gap-1">
+                <NavLink
+                  to="/sign-in"
+                  className={({ isActive }) =>
+                    `block py-3 px-3 rounded-md ${navLinkBase} ${isActive ? navLinkActive : ""}`
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Sign in
+                </NavLink>
+                <NavLink
+                  to="/sign-up"
+                  className={({ isActive }) =>
+                    `block py-3 px-3 rounded-md ${navLinkBase} ${isActive ? navLinkActive : ""}`
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Sign up
+                </NavLink>
+              </div>
+            )}
+          </li>
           <li className="pt-2">
             <Link
               to="/booking"

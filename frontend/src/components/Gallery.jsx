@@ -1,19 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import {
+  galleryNearbyImages,
+  galleryRoomsImages,
+} from "../data/galleryImages.js";
 
-import g1 from "../assets/Dhaneshwari Photoshoot/roomwithTV.jpeg";
-import g2 from "../assets/Dhaneshwari Photoshoot/room2.jpeg";
-import g3 from "../assets/Dhaneshwari Photoshoot/room3.jpeg";
-import g4 from "../assets/Dhaneshwari Photoshoot/room4.jpeg";
-import g5 from "../assets/Dhaneshwari Photoshoot/room5.jpeg";
-import g6 from "../assets/Dhaneshwari Photoshoot/astheticRoom.jpeg";
-import g7 from "../assets/Dhaneshwari Photoshoot/boubleBedRoom.jpeg";
-import g8 from "../assets/Dhaneshwari Photoshoot/Gallary1.jpg";
-import g9 from "../assets/Dhaneshwari Photoshoot/room5.jpeg";
-import g10 from "../assets/Dhaneshwari Photoshoot/roomBalloon2.jpg";
-import g12 from "../assets/Dhaneshwari Photoshoot/Gallary3.jpg";
-
-export const galleryRoomsImages = [g1, g2, g3, g4, g5, g6, g7, g9, g10];
-export const galleryNearbyImages = [g8, g12];
 const images = [...galleryRoomsImages, ...galleryNearbyImages];
 
 function Lightbox({ selectedImage, setSelectedImage, images }) {
@@ -74,7 +64,7 @@ function GalleryCarousel({ label = "Gallery", images }) {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const autoPlayRef = useRef();
+  const autoPlayRef = useRef(null);
 
   const [itemsPerView, setItemsPerView] = useState(4);
 
@@ -89,79 +79,55 @@ function GalleryCarousel({ label = "Gallery", images }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const effectiveItemsPerView = Math.min(itemsPerView, images.length || 1);
-  const shouldCarousel = images.length > effectiveItemsPerView;
-
-  if (!images?.length) return null;
-
-  if (!shouldCarousel) {
-    return (
-      <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {images.map((img, idx) => (
-            <button
-              key={img}
-              type="button"
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition focus:outline-none focus:ring-2 focus:ring-orange-500"
-              onClick={() => setSelectedImage(img)}
-              aria-label={`Open ${label} image ${idx + 1}`}
-            >
-              <img
-                src={img}
-                alt={`${label} ${idx + 1}`}
-                className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
-            </button>
-          ))}
-        </div>
-
-        <Lightbox
-          selectedImage={selectedImage}
-          setSelectedImage={setSelectedImage}
-          images={images}
-        />
-      </>
-    );
-  }
-
-  const extendedImages = [
-    ...images.slice(-effectiveItemsPerView),
-    ...images,
-    ...images.slice(0, effectiveItemsPerView),
-  ];
-
-  const totalSlides = images.length;
+  const length = images?.length ?? 0;
+  const effectiveItemsPerView = Math.min(itemsPerView, Math.max(length, 1));
+  const shouldCarousel = length > effectiveItemsPerView;
+  const totalSlides = length;
   const startIndex = effectiveItemsPerView;
+
   const [slideIndex, setSlideIndex] = useState(startIndex);
 
   useEffect(() => {
     setSlideIndex(effectiveItemsPerView);
   }, [effectiveItemsPerView]);
 
+  const extendedImages =
+    shouldCarousel && length > 0
+      ? [
+          ...images.slice(-effectiveItemsPerView),
+          ...images,
+          ...images.slice(0, effectiveItemsPerView),
+        ]
+      : [];
+
   const handleTransitionEnd = () => {
     setIsTransitioning(false);
-
-    if (slideIndex >= totalSlides + effectiveItemsPerView) {
-      setSlideIndex(startIndex);
-    } else if (slideIndex < effectiveItemsPerView) {
-      setSlideIndex(totalSlides + effectiveItemsPerView - 1);
-    }
+    if (!shouldCarousel || totalSlides === 0) return;
+    setSlideIndex((current) => {
+      if (current >= totalSlides + effectiveItemsPerView) return startIndex;
+      if (current < effectiveItemsPerView) {
+        return totalSlides + effectiveItemsPerView - 1;
+      }
+      return current;
+    });
   };
 
   const nextSlide = () => {
+    if (!shouldCarousel) return;
     if (isTransitioning) return;
     setIsTransitioning(true);
     setSlideIndex((prev) => prev + 1);
   };
 
   const prevSlide = () => {
+    if (!shouldCarousel) return;
     if (isTransitioning) return;
     setIsTransitioning(true);
     setSlideIndex((prev) => prev - 1);
   };
 
   const goToSlide = (index) => {
+    if (!shouldCarousel) return;
     if (isTransitioning) return;
     setIsTransitioning(true);
     setSlideIndex(startIndex + index);
@@ -169,19 +135,28 @@ function GalleryCarousel({ label = "Gallery", images }) {
 
   useEffect(() => {
     clearInterval(autoPlayRef.current);
+    autoPlayRef.current = null;
+    if (!shouldCarousel || totalSlides === 0) return undefined;
+
     autoPlayRef.current = setInterval(() => {
-      nextSlide();
+      setIsTransitioning((t) => (t ? t : true));
+      setSlideIndex((prev) => prev + 1);
     }, 3000);
 
-    return () => clearInterval(autoPlayRef.current);
-  }, [effectiveItemsPerView, totalSlides]);
+    return () => {
+      clearInterval(autoPlayRef.current);
+      autoPlayRef.current = null;
+    };
+  }, [shouldCarousel, effectiveItemsPerView, totalSlides]);
 
   const pauseAutoPlay = () => clearInterval(autoPlayRef.current);
 
   const resumeAutoPlay = () => {
+    if (!shouldCarousel || totalSlides === 0) return;
     clearInterval(autoPlayRef.current);
     autoPlayRef.current = setInterval(() => {
-      nextSlide();
+      setIsTransitioning((t) => (t ? t : true));
+      setSlideIndex((prev) => prev + 1);
     }, 3000);
   };
 
@@ -207,18 +182,41 @@ function GalleryCarousel({ label = "Gallery", images }) {
     resumeAutoPlay();
   };
 
+  if (!length) return null;
+
+  if (!shouldCarousel) {
+    return (
+      <>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {images.map((img, idx) => (
+            <button
+              key={`${label}-${idx}`}
+              type="button"
+              className="group relative overflow-hidden rounded-2xl bg-white shadow-md transition hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-500"
+              onClick={() => setSelectedImage(img)}
+              aria-label={`Open ${label} image ${idx + 1}`}
+            >
+              <img
+                src={img}
+                alt={`${label} ${idx + 1}`}
+                className="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-110 sm:h-64"
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+
+        <Lightbox
+          selectedImage={selectedImage}
+          setSelectedImage={setSelectedImage}
+          images={images}
+        />
+      </>
+    );
+  }
+
   return (
     <>
-<<<<<<< fix-ui
-      <section className="w-full px-4  sm:px-6 lg:px-10">
-        <div className="w-full py-10 sm:py-8 lg:py-10 rounded-2xl">
-          <div className="text-center mb-8 sm:mb-10 lg:mb-12 px-4">
-         <h2 className="group relative inline-block text-2xl sm:text-3xl font-semibold text-gray-900 font-[Poppins] cursor-pointer">
-  Our Gallery
-  <span className=" absolute left-1/2 -translate-x-1/2 -bottom-2 h-1/17 w-12 bg-black transition-all duration-500 group-hover:w-full"></span>
-</h2>
-        </div>
-=======
       <div
         className="relative group"
         onMouseEnter={pauseAutoPlay}
@@ -227,7 +225,6 @@ function GalleryCarousel({ label = "Gallery", images }) {
         <div className="relative rounded-3xl overflow-hidden">
           <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 sm:w-24 bg-gradient-to-r from-[#e7e1d5] to-transparent"></div>
           <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 sm:w-24 bg-gradient-to-l from-[#e7e1d5] to-transparent"></div>
->>>>>>> main
 
           <div
             className="flex transition-transform duration-500 ease-out"
