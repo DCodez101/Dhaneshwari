@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 
 const navLinkBase =
-  "relative block font-semibold text-gray-700 transition-colors duration-200 hover:text-orange-500";
+  "relative block whitespace-nowrap font-semibold text-gray-700 transition-colors duration-200 hover:text-orange-500";
 
 const navLinkActive = "text-orange-600";
 
@@ -18,8 +18,10 @@ const navItems = [
   { name: "Rooms & Amenities", path: "/rooms" },
   { name: "Gallery", path: "/gallery" },
   { name: "Famous Attractions", path: "/famous-attractions" },
+  { name: "Testimonials", path: "/testimonials" },
   { name: "About", path: "/about" },
   { name: "Reservation", path: "/reservation" },
+  { name: "My Reservations", path: "/my-reservations" },
   { name: "Contact", path: "/contact" },
 ];
 
@@ -29,16 +31,16 @@ function Navbar() {
 
   return (
     <nav className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-gray-200">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+      <div className="mx-auto flex max-w-screen-2xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
         <NavLink
           to="/"
-          className="shrink-0 text-lg sm:text-xl font-semibold tracking-wide text-orange-500"
+          className="shrink-0 text-base sm:text-lg xl:text-xl font-semibold tracking-wide text-orange-500"
           onClick={() => setMenuOpen(false)}
         >
           LOGO
         </NavLink>
 
-        <ul className="hidden lg:flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+        <ul className="hidden lg:flex flex-1 min-w-0 items-center justify-center gap-3 xl:gap-5 text-[12px] xl:text-sm">
           {navItems.map((item) => (
             <li key={item.name}>
               <NavLink
@@ -54,12 +56,12 @@ function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden lg:flex items-center gap-3 shrink-0">
+        <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
           {isAuthenticated ? (
             <button
               type="button"
               onClick={() => signOut()}
-              className="text-sm font-semibold text-gray-600 hover:text-orange-600"
+              className="text-xs xl:text-sm font-semibold text-gray-600 hover:text-orange-600 whitespace-nowrap"
             >
               Sign out
             </button>
@@ -68,7 +70,7 @@ function Navbar() {
               <NavLink
                 to="/sign-in"
                 className={({ isActive }) =>
-                  `${authLinkBase} ${isActive ? authLinkActive : ""}`
+                  `whitespace-nowrap text-xs xl:text-sm ${authLinkBase} ${isActive ? authLinkActive : ""}`
                 }
               >
                 Sign in
@@ -76,7 +78,7 @@ function Navbar() {
               <NavLink
                 to="/sign-up"
                 className={({ isActive }) =>
-                  `${authLinkBase} ${isActive ? authLinkActive : ""}`
+                  `whitespace-nowrap text-xs xl:text-sm ${authLinkBase} ${isActive ? authLinkActive : ""}`
                 }
               >
                 Sign up
@@ -85,7 +87,7 @@ function Navbar() {
           )}
           <Link
             to="/booking"
-            className="inline-flex rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+            className="inline-flex rounded-md bg-orange-500 px-3 xl:px-4 py-2 text-xs xl:text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 whitespace-nowrap"
           >
             Booking
           </Link>
@@ -103,10 +105,10 @@ function Navbar() {
 
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-out ${
-          menuOpen ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-[85vh] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <ul className="flex flex-col px-4 pb-4 pt-2 gap-1 border-t border-gray-100">
+        <ul className="flex max-h-[78vh] overflow-y-auto flex-col px-4 pb-4 pt-2 gap-1 border-t border-gray-100">
           {navItems.map((item) => (
             <li key={item.name}>
               <NavLink

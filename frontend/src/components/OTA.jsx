@@ -5,7 +5,7 @@ const OTASection = () => {
   const platforms = [
     {
       id: 1,
-      name: "MakeMyTrip",
+      name: "Booking.com",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z" />
@@ -14,7 +14,7 @@ const OTASection = () => {
       color: "text-red-500",
       bgColor: "bg-blue-50 group-hover:bg-blue-100",
       borderColor: "border-blue-200 group-hover:border-blue-300",
-      url: "https://www.makemytrip.com/hotels/dhaneshwari_luxury_homestay-details-varanasi.html",
+      url: "https://www.booking.com/",
       rating: 4.5,
       reviews: 1240,
       features: "Free Cancellation • Instant Confirmation"
@@ -37,7 +37,7 @@ const OTASection = () => {
     },
     {
       id: 3,
-      name: "Airbnb.com",
+      name: "Airbnb",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z" />
@@ -49,7 +49,7 @@ const OTASection = () => {
       url: "https://www.airbnb.co.in/rooms/1445081925613736894?source_impression_id=p3_1774512782_P3cKhNGQNgKGuHYn",
       rating: 4.8,
       reviews: 3250,
-      features: "Genius Member Benefits • Free WiFi"
+      features: "Superhost Listings • Flexible Stays"
     }
   ];
 
@@ -84,18 +84,18 @@ const OTASection = () => {
   return (
     <>
       <Helmet>
-        <title>Book Your Stay | Dhaneshwari Hotel - Best Rates on MakeMyTrip, Agoda & Airbnb</title>
+        <title>Book Your Stay | Dhaneshwari Hotel - Best Rates on Booking, Agoda & Airbnb</title>
         <meta 
           name="description" 
-          content="Book your luxury stay at Dhaneshwari Hotel through top booking platforms. Compare rates on MakeMyTrip, Agoda, and Airbnb. Best price guaranteed with instant confirmation." 
+          content="Book your luxury stay at Dhaneshwari Hotel through top booking platforms. Compare rates on Booking.com, Agoda, and Airbnb. Best price guaranteed with instant confirmation." 
         />
         <meta 
           name="keywords" 
-          content="Dhaneshwari Hotel booking, MakeMyTrip Dhaneshwari, Agoda Dhaneshwari, Airbnb Varanasi, hotel booking platforms, luxury hotel Varanasi" 
+          content="Dhaneshwari Hotel booking, Booking.com Dhaneshwari, Agoda Dhaneshwari, Airbnb Varanasi, hotel booking platforms, luxury hotel Varanasi" 
         />
         <link rel="canonical" href={typeof window !== "undefined" ? `${window.location.origin}/booking` : "https://dhaneshwari.com/booking"} />
         <meta property="og:title" content="Book Your Stay at Dhaneshwari Hotel - Best Rates Guaranteed" />
-        <meta property="og:description" content="Find the best rates for Dhaneshwari Hotel on MakeMyTrip, Agoda, and Airbnb. Book now for instant confirmation and exclusive deals." />
+        <meta property="og:description" content="Find the best rates for Dhaneshwari Hotel on Booking.com, Agoda, and Airbnb. Book now for instant confirmation and exclusive deals." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>

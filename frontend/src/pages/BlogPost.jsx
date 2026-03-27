@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { attractionPosts, blogPosts } from "../data/siteData";
 import NotFound from "./NotFound";
+import { Helmet } from "react-helmet-async";
+import { getImageAlt, getSeoFileName } from "../utils/imageSeo";
 
 function BlogPost() {
   const { slug } = useParams();
@@ -11,6 +13,18 @@ function BlogPost() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14">
+      <Helmet>
+        <title>{`${post.title} | Dhaneshwari Blog`}</title>
+        <meta name="description" content={post.excerpt} />
+        <link
+          rel="canonical"
+          href={
+            typeof window !== "undefined"
+              ? `${window.location.origin}/famous-attractions/${post.slug}`
+              : `https://dhaneshwari.com/famous-attractions/${post.slug}`
+          }
+        />
+      </Helmet>
       <div className="text-xs font-semibold tracking-wide text-gray-500">
         {post.date}
       </div>
@@ -22,9 +36,11 @@ function BlogPost() {
           <div className="relative h-56 w-full sm:h-72">
             <img
               src={post.image}
-              alt={post.title}
+              alt={getImageAlt(post)}
+              data-seo-filename={getSeoFileName(post.title)}
               className="h-full w-full object-cover"
               loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

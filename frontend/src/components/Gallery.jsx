@@ -4,6 +4,7 @@ import {
   galleryNearbyImages,
   galleryRoomsImages,
 } from "../data/galleryImages.js";
+import { getImageAlt, getSeoFileName } from "../utils/imageSeo";
 
 const images = [...galleryRoomsImages, ...galleryNearbyImages];
 
@@ -68,7 +69,7 @@ function Lightbox({ selectedImage, setSelectedImage, images }) {
 
       <img
         src={selectedImage}
-        alt=""
+        alt={getImageAlt()}
         loading="lazy"
         decoding="async"
         className="max-h-[85vh] max-w-[90vw] rounded-lg object-contain shadow-2xl"
@@ -90,7 +91,7 @@ function Lightbox({ selectedImage, setSelectedImage, images }) {
   );
 }
 
-function GalleryCarousel({ label = "Gallery", images }) {
+export function GalleryCarousel({ label = "Gallery", images }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -238,9 +239,10 @@ function GalleryCarousel({ label = "Gallery", images }) {
             >
               <img
                 src={img}
-                alt=""
+                alt={getImageAlt()}
                 loading="lazy"
                 decoding="async"
+                data-seo-filename={getSeoFileName(`${label}-${idx + 1}`)}
                 className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-110 sm:h-64"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
@@ -294,9 +296,10 @@ function GalleryCarousel({ label = "Gallery", images }) {
                 >
                   <img
                     src={img}
-                    alt=""
+                    alt={getImageAlt()}
                     loading="lazy"
                     decoding="async"
+                    data-seo-filename={getSeoFileName(`${label}-${index + 1}`)}
                     className="h-56 sm:h-64 w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />

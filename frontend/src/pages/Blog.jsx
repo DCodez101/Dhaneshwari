@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import image1 from "../assets/Dhaneshwari Photoshoot/Kashi-Vishwanath.webp";
 import image2 from "../assets/Dhaneshwari Photoshoot/kalBharavTemple.webp";
 import image3 from "../assets/Dhaneshwari Photoshoot/eveningArati.webp";
 import image4 from "../assets/Dhaneshwari Photoshoot/manikarnika_Ghat.webp";
 import image5 from "../assets/Dhaneshwari Photoshoot/Bundri_Ghat.jpg";
 import image6 from "../assets/Dhaneshwari Photoshoot/KashiDham.jpg";
+import { getImageAlt, getSeoFileName } from "../utils/imageSeo";
 
 const placesBlogs = [
   {
@@ -82,8 +84,11 @@ function Section({ title, subtitle, items }) {
               <div className="relative h-48 sm:h-56 w-full overflow-hidden">
                 <img
                   src={item.image}
-                  alt={item.title}
+                  alt={getImageAlt(item)}
+                  data-seo-filename={getSeoFileName(item.title)}
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -106,6 +111,21 @@ function Section({ title, subtitle, items }) {
 function Blog() {
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12 lg:py-16">
+      <Helmet>
+        <title>Famous Attractions Blog | Dhaneshwari Hotel</title>
+        <meta
+          name="description"
+          content="Explore famous attractions, local experiences, and food around Varanasi in our short travel blogs."
+        />
+        <link
+          rel="canonical"
+          href={
+            typeof window !== "undefined"
+              ? `${window.location.origin}/famous-attractions`
+              : "https://dhaneshwari.com/famous-attractions"
+          }
+        />
+      </Helmet>
       <header className="text-center mb-8 sm:mb-10 lg:mb-12">
         <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-amber-600">
           Famous Attractions

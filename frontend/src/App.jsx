@@ -11,6 +11,9 @@ import ContactUs from "./pages/ContactUs";
 import Booking from "./pages/Booking";
 import Payment from "./pages/Payment";
 import Reservation from "./pages/Reservation";
+import UserReservationPage from "./pages/UserReservationPage";
+import Testimonials from "./components/Testimonials";
+import OTASection from "./components/OTA";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -39,6 +42,9 @@ function App() {
         <Route path="about" element={<AboutUs />} />
         <Route path="contact" element={<ContactUs />} />
         <Route path="reservation" element={<Reservation />} />
+        <Route path="my-reservations" element={<UserReservationPage />} />
+        <Route path="testimonials" element={<Testimonials />} />
+        <Route path="ota-platforms" element={<OTASection />} />
         <Route path="profile" element={<Profile />} />
         <Route path="sign-in" element={<SignIn />} />
         <Route path="sign-up" element={<SignUp />} />

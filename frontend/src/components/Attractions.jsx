@@ -7,6 +7,7 @@ import image3 from "../assets/Dhaneshwari Photoshoot/eveningArati.webp";
 import image4 from "../assets/Dhaneshwari Photoshoot/manikarnika_Ghat.webp";
 import image5 from "../assets/Dhaneshwari Photoshoot/Bundri_Ghat.jpg";
 import image6 from "../assets/Dhaneshwari Photoshoot/KashiDham.jpg";
+import { getImageAlt, getSeoFileName } from "../utils/imageSeo";
 
 const attractions = [
   {
@@ -307,8 +308,9 @@ function Attractions() {
                        
                         <img
                           src={item.img}
-                          alt=""
+                          alt={getImageAlt(item.seo)}
                           title={item.title}
+                          data-seo-filename={getSeoFileName(item.seo?.filename || item.title)}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
                           loading="lazy"
                           decoding="async"

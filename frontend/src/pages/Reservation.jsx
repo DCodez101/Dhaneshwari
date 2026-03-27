@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const STORAGE_KEY = "dhaneshwari_reservations";
 
@@ -58,6 +59,12 @@ function Reservation() {
               Continue to booking
             </Link>
             <Link
+              to="/my-reservations"
+              className="rounded-md border border-orange-300 bg-orange-50 px-6 py-3 text-sm font-semibold text-orange-700 hover:border-orange-400"
+            >
+              View your reservations
+            </Link>
+            <Link
               to="/"
               className="rounded-md border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-800 hover:border-gray-400"
             >
@@ -71,6 +78,21 @@ function Reservation() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-14">
+      <Helmet>
+        <title>Reservation Request | Dhaneshwari Hotel</title>
+        <meta
+          name="description"
+          content="Submit your reservation request for Dhaneshwari Hotel and our team will confirm availability."
+        />
+        <link
+          rel="canonical"
+          href={
+            typeof window !== "undefined"
+              ? `${window.location.origin}/reservation`
+              : "https://dhaneshwari.com/reservation"
+          }
+        />
+      </Helmet>
       <header className="mb-8">
         <h1 className="text-3xl font-semibold text-gray-900">Reservation</h1>
         <p className="mt-2 text-gray-600">

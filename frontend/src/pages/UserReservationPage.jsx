@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import SuperiorLuxuryBedroom from '../assets/Dhaneshwari Photoshoot/Superior Luxury Bedroom.jpeg';
-import PremiumLuxuryDoubleBedroom from '../assets/Dhaneshwari Photoshoot/Premium Luxury Double Bedroom.jpg';
-import SuperiorDeluxeDoubleBedroom from '../assets/Dhaneshwari Photoshoot/Superior Deluxe Double Bedroom.jpg';
-import PremiumLuxuryFamilyRoom from '../assets/Dhaneshwari Photoshoot/Premium Luxury Family Room.jpeg';
+import { Helmet } from "react-helmet-async";
+import SuperiorLuxuryBedroom from '../assets/Dhaneshwari Photoshoot/roomwithTV.jpeg';
+import PremiumLuxuryDoubleBedroom from '../assets/Dhaneshwari Photoshoot/roomwithBalloon.jpg';
+import SuperiorDeluxeDoubleBedroom from '../assets/Dhaneshwari Photoshoot/room3.jpeg';
+import PremiumLuxuryFamilyRoom from '../assets/Dhaneshwari Photoshoot/astheticRoom.jpeg';
 const DhaneshwariReservations = () => {
   const [reservations, setReservations] = useState([]);
   const [filter, setFilter] = useState('all');
@@ -217,6 +218,21 @@ const DhaneshwariReservations = () => {
 
   return (
     <div className="min-h-screen  p-4 sm:p-6 lg:p-8">
+      <Helmet>
+        <title>Your Reservations | Dhaneshwari Hotel</title>
+        <meta
+          name="description"
+          content="View and manage your upcoming and past Dhaneshwari Hotel reservations."
+        />
+        <link
+          rel="canonical"
+          href={
+            typeof window !== "undefined"
+              ? `${window.location.origin}/my-reservations`
+              : "https://dhaneshwari.com/my-reservations"
+          }
+        />
+      </Helmet>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8 text-center">

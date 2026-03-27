@@ -5,6 +5,7 @@ import room1 from "../assets/Dhaneshwari Photoshoot/roomewithBlancket.jpeg";
 import room2 from "../assets/Dhaneshwari Photoshoot/roomwithBalloon.jpg";
 import room3 from "../assets/Dhaneshwari Photoshoot/astheticRoom.jpeg";
 import { buildQuickPaymentState } from "../utils/quickPaymentState";
+import { getImageAlt, getSeoFileName } from "../utils/imageSeo";
 
 const rooms = [
   {
@@ -109,9 +110,10 @@ function Rooms() {
                   <img
                     src={room.img}
                     className="h-48 sm:h-52 lg:h-56 w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    alt={room.title}
+                    alt={getImageAlt(room)}
                     loading="lazy"
                     decoding="async"
+                    data-seo-filename={getSeoFileName(room.title)}
                   />
                  
                 </div>
