@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const passport = require('passport');
 
 dotenv.config();
 connectDB();
@@ -22,6 +23,7 @@ app.use('/api/blogs', require('./routes/blogs'));
 app.use('/api/promotions', require('./routes/promotions'));
 app.use('/uploads', express.static('uploads'));
 app.use('/sitemap.xml', require('./routes/sitemap'));
+app.use(passport.initialize());
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
